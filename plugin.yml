@@ -1,0 +1,28 @@
+---
+# Get player height location relative to sea level using command
+# Copyright (C) 2021 KygekDev
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# he Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+
+name: Height
+version: 1.0.0
+description: Get player height location relative to sea level using command
+author: KygekDev
+website: https://github.com/KygekDev/Height
+api: 3.0.0
+main: KygekDev\Height\Height
+
+commands:
+  height:
+    description: Get player height location relative to sea level
+    usage: /height [player]
+    permission: height.command
+
+permissions:
+  height.command:
+    description: Permission to use Height plugin command
+    default: true
+...
