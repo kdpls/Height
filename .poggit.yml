@@ -1,0 +1,8 @@
+--- # Poggit-CI Manifest. Open the CI at https://poggit.pmmp.io/ci/KygekDev/Height
+build-by-default: true
+branches:
+- main
+projects:
+  Height:
+    path: ""
+...
