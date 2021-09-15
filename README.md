@@ -15,7 +15,7 @@ Get a player height location relative to sea level: `/height <player>` (Example:
 ## Downloads
 
 - Stable version (Recommended for most users): [Latest](https://github.com/KygekDev/Height/releases/latest) | [All releases](https://github.com/KygekDev/Height/releases)
-- Build version (Only recommended for advanced users): [Poggit CI](https://poggit.pmmp.io/ci/KygekDev/Height/~)
+- Build version (Only recommended for advanced users): [Poggit CI](https://poggit.pmmp.io/ci/kdpls/Height/~)
 
 ## Info
 
