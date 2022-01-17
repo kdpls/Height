@@ -18,7 +18,7 @@ main: KygekDev\Height\Height
 commands:
   height:
     description: Get player height location relative to sea level
-    usage: /height <player>
+    usage: /height [player]
     permission: height.command
 
 permissions:
