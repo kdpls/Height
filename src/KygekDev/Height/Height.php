@@ -16,7 +16,7 @@ namespace KygekDev\Height;
 
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
-use pocketmine\Player;
+use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat as TF;
 
@@ -31,18 +31,15 @@ class Height extends PluginBase {
         if ($command->getName() !== "height" || !$sender->hasPermission(self::COMMAND_PERMISSION)) return true;
 
         if (!isset($args[0])) {
-            if (!$sender instanceof Player) {
-                $this->sendMessage($sender, "Usage: /height <player>");
-                return true;
-            }
+            if (!$sender instanceof Player) return false;
 
             $height = $this->getHeight($sender);
             $this->sendMessage($sender, "You're " . ($height >= 0 ? $height . "m above" : abs($height) . "m below") . " sea level");
             return true;
         }
 
-        $player = $this->getServer()->getPlayer($args[0]);
-        if ($player === null) {
+        $player = $this->getServer()->getPlayerByPrefix($args[0]);
+        if (!$player) {
             $sender->sendMessage(self::PREFIX . TF::RED . "Player is not online!");
             return true;
         }
@@ -53,7 +50,7 @@ class Height extends PluginBase {
     }
 
     private function getHeight(Player $player) : float {
-        return round($player->getY() - self::SEA_LEVEL, 1);
+        return round($player->getPosition()->getY() - self::SEA_LEVEL, 1);
     }
 
     private function sendMessage(CommandSender $sender, string $message) {
