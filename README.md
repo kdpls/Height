@@ -1,5 +1,8 @@
 # Height
 
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/kdpls/Height?style=flat-square)
+![GitHub all releases](https://img.shields.io/github/downloads/kdpls/Height/total?label=downloads%40total&style=flat-square)
+![GitHub release (latest by date)](https://img.shields.io/github/downloads/kdpls/Height/latest/total?style=flat-square)
 ![Discord](https://img.shields.io/discord/856281149503963166?style=flat-square)
 
 A PocketMine-MP plugin to get player height location relative to sea level using command.
@@ -14,8 +17,8 @@ Get a player height location relative to sea level: `/height <player>` (Example:
 
 ## Downloads
 
-- Stable version (Recommended for most users): [Latest](https://github.com/KygekDev/Height/releases/latest) | [All releases](https://github.com/KygekDev/Height/releases)
-- Build version (Only recommended for advanced users): [Poggit CI](https://poggit.pmmp.io/ci/kdpls/Height/~)
+- Stable version (Recommended): [Latest](https://github.com/KygekDev/Height/releases/latest) | [All releases](https://github.com/KygekDev/Height/releases)
+- Build version (For advanced users): [Poggit CI](https://poggit.pmmp.io/ci/kdpls/Height/~)
 
 ## Info
 
