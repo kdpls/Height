@@ -12,7 +12,7 @@ version: 1.0.0
 description: Get player height location relative to sea level using command
 author: KygekDev
 website: https://github.com/KygekDev/Height
-api: 3.0.0
+api: 4.0.0
 main: KygekDev\Height\Height
 
 commands:
