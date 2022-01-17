@@ -2,7 +2,7 @@
 
 /*
  * Get player height location relative to sea level using command
- * Copyright (C) 2021 KygekDev
+ * Copyright (C) 2021-2022 KygekDev
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
