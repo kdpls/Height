@@ -15,6 +15,11 @@ Permission: `height.command` (Default: `true`)
 Get self height location relative to sea level (only works if command sender is an online player): `/height`\
 Get a player height location relative to sea level: `/height <player>` (Example: `/height KygekDev` to get height location of player KygekDev relative to sea level)
 
+## Downloads
+
+- Stable version (Recommended): [Latest](https://github.com/KygekDev/Height/releases/latest) | [All releases](https://github.com/KygekDev/Height/releases)
+- Build version (For advanced users): [Poggit CI](https://poggit.pmmp.io/ci/kdpls/Height/~)
+
 ## API
 
 ### `\KygekDev\Height\Height::getHeight()`
@@ -53,11 +58,6 @@ $heightString = $height >= 0 ? $height . "m above" : abs($height) . "m below";
 
 $player->sendMessage("Player $name is $heightString sea level");
 ```
-
-## Downloads
-
-- Stable version (Recommended): [Latest](https://github.com/KygekDev/Height/releases/latest) | [All releases](https://github.com/KygekDev/Height/releases)
-- Build version (For advanced users): [Poggit CI](https://poggit.pmmp.io/ci/kdpls/Height/~)
 
 ## Info
 
