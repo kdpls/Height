@@ -15,6 +15,45 @@ Permission: `height.command` (Default: `true`)
 Get self height location relative to sea level (only works if command sender is an online player): `/height`\
 Get a player height location relative to sea level: `/height <player>` (Example: `/height KygekDev` to get height location of player KygekDev relative to sea level)
 
+## API
+
+### `\KygekDev\Height\Height::getHeight()`
+
+**Description**
+
+Gets player's height location (Y coordinate) relative to sea level
+
+**Synopsis**
+
+```php
+public static getHeight(Player $player, int $precision = 1) : float
+```
+
+**Parameters**
+
+- `Player $player`: The `Player` object to get height location of
+- `int $precision = 1`: Number of decimal places to pass to the `round()` function
+
+**Returns**
+
+`float`: Player's Y coordinate relative to sea level
+
+**Example**
+
+```php
+use KygekDev\Height\Height;
+use pocketmine\Server;
+
+$player = Server::getInstance()->getPlayerExact("KygekDev");
+
+$name = $player->getName();
+// 2 decimal places (.xx)
+$height = Height::getHeight($player, 2);
+$heightString = $height >= 0 ? $height . "m above" : abs($height) . "m below";
+
+$player->sendMessage("Player $name is $heightString sea level");
+```
+
 ## Downloads
 
 - Stable version (Recommended): [Latest](https://github.com/KygekDev/Height/releases/latest) | [All releases](https://github.com/KygekDev/Height/releases)

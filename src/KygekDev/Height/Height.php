@@ -33,7 +33,7 @@ class Height extends PluginBase {
         if (!isset($args[0])) {
             if (!$sender instanceof Player) return false;
 
-            $height = $this->getHeight($sender);
+            $height = self::getHeight($sender);
             $this->sendMessage($sender, "You're " . ($height >= 0 ? $height . "m above" : abs($height) . "m below") . " sea level");
             return true;
         }
@@ -44,13 +44,20 @@ class Height extends PluginBase {
             return true;
         }
 
-        $height = $this->getHeight($player);
+        $height = self::getHeight($player);
         $this->sendMessage($sender, "Player " . $player->getName() . " is " . ($height >= 0 ? $height . "m above" : abs($height) . "m below")  . " sea level");
         return true;
     }
 
-    private function getHeight(Player $player) : float {
-        return round($player->getPosition()->getY() - self::SEA_LEVEL, 1);
+    /**
+     * Gets player's height location (Y coordinate) relative to sea level
+     *
+     * @param Player $player    Player to get height location of
+     * @param int $precision    Number of decimal places to pass to the round() function
+     * @return float
+     */
+    public static function getHeight(Player $player, int $precision = 1) : float {
+        return round($player->getPosition()->getY() - self::SEA_LEVEL, $precision);
     }
 
     private function sendMessage(CommandSender $sender, string $message) {
