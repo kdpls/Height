@@ -27,7 +27,7 @@ jobs:
       - name: Delete unused files
         run: |
           shopt -s extglob
-          rm -rfv !("src/*"|"plugin.yml"|".build/*"|".git/*")
+          rm -rfv !("src"|"plugin.yml"|".build"|".git")
 
       - name: Display structure of current working directory
         run: ls -laR
