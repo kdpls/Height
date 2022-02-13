@@ -1,0 +1,39 @@
+name: Build PHAR
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Make '.build' directory
+        run: mkdir .build
+
+      - name: Download DevTools/ConsoleScript.php
+        run: wget -O .build/build.php https://raw.githubusercontent.com/pmmp/DevTools/master/src/DevTools/ConsoleScript.php
+
+      - name: Build source to PHAR
+        run: php -dphar.readonly=0 .build/build.php --make ./ --out .build/Height_${{ github.sha }}.phar
+
+      - name: Display structure of current working directory
+        run: ls -laR
+
+      - name: Release PHAR artifact to GitHub Releases
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Height build ${{ github.sha }}
+          body: |
+            Build SHA: ${{ github.sha }}
+            
+            ## IMPORTANT
+            This is an unstable build of the Height plugin. Only use this build for testing or development purposes.
+            
+            ### Why we use GitHub Releases?
+            We use GitHub Releases instead of GitHub Actions artifacts to retain every build as long as possible.
+          prerelease: true
+          fail_on_unmatched_files: true
+          files: |
+            .build/Height_${{ github.sha }}.phar
