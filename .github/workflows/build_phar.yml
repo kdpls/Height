@@ -24,6 +24,7 @@ jobs:
       - name: Release PHAR artifact to GitHub Releases
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ github.sha }}
           name: Height build ${{ github.sha }}
           body: |
             Build SHA: ${{ github.sha }}
