@@ -23,6 +23,9 @@ jobs:
 
       - name: Build source to PHAR
         run: php -dphar.readonly=0 .build/build.php --make ./ --out .build/Height_${{ steps.vars.outputs.sha_short }}.phar
+      
+      - name: Delete unused files
+        run: rm -rfv !("src"|"plugin.yml"|".build"|".git")
 
       - name: Display structure of current working directory
         run: ls -laR
