@@ -38,10 +38,10 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: build_${{ steps.vars.outputs.sha_short }}
-          name: Height - Build `${{ steps.vars.outputs.sha_short }}` (`${{ steps.vars.outputs.date }}`)
+          name: Height - Build ${{ steps.vars.outputs.sha_short }}
           body: |
             Build Date: `${{ steps.vars.outputs.date }}`
-            Build SHA: `${{ steps.vars.outputs.sha_short }}`
+            Build SHA: ${{ steps.vars.outputs.sha_short }}
             Last Commit Message: `${{ github.event.commits[0].message }}`
             
             ## IMPORTANT
