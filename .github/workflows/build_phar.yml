@@ -11,9 +11,11 @@ jobs:
         uses: actions/checkout@v2
       
       # https://stackoverflow.com/a/59819441
-      - name: Get short SHA
+      - name: Set custom variables
         id: vars
-        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+        run: |
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+          echo "::set-output name=date::$(date --rfc-3339=seconds)"
 
       - name: Make '.build' directory
         run: mkdir .build
@@ -36,8 +38,9 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: build_${{ steps.vars.outputs.sha_short }}
-          name: Height build ${{ steps.vars.outputs.sha_short }}
+          name: Height - Build ${{ steps.vars.outputs.sha_short }} (${{ steps.vars.outputs.sha_short }})
           body: |
+            Build Date: ${{ steps.vars.outputs.date }}
             Build SHA: ${{ steps.vars.outputs.sha_short }}
             
             ## IMPORTANT
