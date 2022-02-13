@@ -7,7 +7,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout GitHub repo
+        uses: actions/checkout@v2
+      
+      # https://stackoverflow.com/a/59819441
+      - name: Get short SHA
+        id: vars
+        run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
 
       - name: Make '.build' directory
         run: mkdir .build
@@ -16,7 +22,7 @@ jobs:
         run: wget -O .build/build.php https://raw.githubusercontent.com/pmmp/DevTools/master/src/ConsoleScript.php
 
       - name: Build source to PHAR
-        run: php -dphar.readonly=0 .build/build.php --make ./ --out .build/Height_${{ github.sha }}.phar
+        run: php -dphar.readonly=0 .build/build.php --make ./ --out .build/Height_${{ steps.vars.outputs.sha_short }}.phar
 
       - name: Display structure of current working directory
         run: ls -laR
@@ -24,10 +30,10 @@ jobs:
       - name: Release PHAR artifact to GitHub Releases
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref_name }}
-          name: Height build ${{ github.sha }}
+          tag_name: build_${{ steps.vars.outputs.sha_short }}
+          name: Height build ${{ steps.vars.outputs.sha_short }}
           body: |
-            Build SHA: ${{ github.sha }}
+            Build SHA: ${{ steps.vars.outputs.sha_short }}
             
             ## IMPORTANT
             This is an unstable build of the Height plugin. Only use this build for testing or development purposes.
@@ -37,4 +43,4 @@ jobs:
           prerelease: true
           fail_on_unmatched_files: true
           files: |
-            .build/Height_${{ github.sha }}.phar
+            .build/Height_${{ steps.vars.outputs.sha_short }}.phar
