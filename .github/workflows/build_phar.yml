@@ -20,17 +20,17 @@ jobs:
 
       - name: Download DevTools/ConsoleScript.php
         run: wget -O .build/build.php https://raw.githubusercontent.com/pmmp/DevTools/master/src/ConsoleScript.php
-
-      - name: Build source to PHAR
-        run: php -dphar.readonly=0 .build/build.php --make ./ --out .build/Height_${{ steps.vars.outputs.sha_short }}.phar
       
       - name: Delete unused files
         run: |
           shopt -s extglob
           rm -rfv !("src"|"plugin.yml"|".build"|".git")
-
+      
       - name: Display structure of current working directory
         run: ls -laR
+
+      - name: Build source to PHAR
+        run: php -dphar.readonly=0 .build/build.php --make ./ --out .build/Height_${{ steps.vars.outputs.sha_short }}.phar
 
       - name: Release PHAR artifact to GitHub Releases
         uses: softprops/action-gh-release@v1
