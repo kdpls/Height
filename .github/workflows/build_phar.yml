@@ -45,7 +45,10 @@ jobs:
           body: |
             Build Date: `${{ steps.vars.outputs.date }}`
             Build SHA: ${{ steps.vars.outputs.sha_short }}
-            Last Commit Message: `${{ github.event.commits[0].message }}`
+            Last Commit Message:
+            ```
+            ${{ github.event.commits[0].message }}
+            ```
             
             ## IMPORTANT
             This is an unstable build of the Height plugin. Only use this build for testing or development purposes.
