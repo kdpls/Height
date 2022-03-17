@@ -32,7 +32,10 @@ jobs:
         run: ls -laR
 
       - name: Build source to PHAR
-        run: php -dphar.readonly=0 .build/build.php --make ./ --out .build/Height_${{ steps.vars.outputs.sha_short }}.phar
+        run: |
+          php -dphar.readonly=0 .build/build.php --make ./ --out .build/Height_${{ steps.vars.outputs.sha_short }}.phar
+          gzip .build/Height_${{ steps.vars.outputs.sha_short }}.phar
+          mv -f .build/Height_${{ steps.vars.outputs.sha_short }}.phar.gz .build/Height_${{ steps.vars.outputs.sha_short }}.phar
 
       - name: Release PHAR artifact to GitHub Releases
         uses: softprops/action-gh-release@v1
