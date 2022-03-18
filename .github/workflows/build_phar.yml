@@ -32,24 +32,30 @@ jobs:
         run: ls -laR
 
       - name: Build source to PHAR
-        run: php -dphar.readonly=0 .build/build.php --make ./ --out .build/Height_${{ steps.vars.outputs.sha_short }}.phar
+        run: |
+          php -dphar.readonly=0 .build/build.php --make ./ --out .build/${{ github.event.repository.name }}_${{ steps.vars.outputs.sha_short }}.phar
+          gzip .build/${{ github.event.repository.name }}_${{ steps.vars.outputs.sha_short }}.phar
+          mv -f .build/${{ github.event.repository.name }}_${{ steps.vars.outputs.sha_short }}.phar.gz .build/${{ github.event.repository.name }}_${{ steps.vars.outputs.sha_short }}.phar
 
       - name: Release PHAR artifact to GitHub Releases
         uses: softprops/action-gh-release@v1
         with:
           tag_name: build_${{ steps.vars.outputs.sha_short }}
-          name: Height - Build ${{ steps.vars.outputs.sha_short }}
+          name: ${{ github.event.repository.name }} - Build ${{ steps.vars.outputs.sha_short }}
           body: |
             Build Date: `${{ steps.vars.outputs.date }}`
             Build SHA: ${{ steps.vars.outputs.sha_short }}
-            Last Commit Message: `${{ github.event.commits[0].message }}`
+            Last Commit Message:
+            ```
+            ${{ github.event.commits[0].message }}
+            ```
             
             ## IMPORTANT
-            This is an unstable build of the Height plugin. Only use this build for testing or development purposes.
+            This is an unstable build of the ${{ github.event.repository.name }} plugin. Only use this build for testing or development purposes.
             
             ### Why we use GitHub Releases?
             We use GitHub Releases instead of GitHub Actions artifacts to retain every build as long as possible.
           prerelease: true
           fail_on_unmatched_files: true
           files: |
-            .build/Height_${{ steps.vars.outputs.sha_short }}.phar
+            .build/${{ github.event.repository.name }}_${{ steps.vars.outputs.sha_short }}.phar
